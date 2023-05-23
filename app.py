@@ -71,7 +71,7 @@ class Predict(Resource):
 class AddProduct(Resource):
     def post(self):
         try:
-            # get_data(request.json)
+            # print(get_data(request.json))
             result = add_product(request.json)
             # row = pd.DataFrame(data=[row])
             #
@@ -91,6 +91,7 @@ class AddProduct(Resource):
             # conn = connect_to_database()
             # add_products_to_database(conn, data_preprocessed)
             return result
+            # return True
 
         except Exception as e:
             return {'error': str(e)}, 400

@@ -1,12 +1,13 @@
 import numpy as np
 import pandas as pd
 
-AI = pd.read_csv('database/product_new.csv')
-trans = AI.iloc[0]
-AI.drop(columns='category',inplace=True)
-AI.drop(columns='asin',inplace=True)
-AI = AI[AI['ProductID'] <= 6000]
-AI.to_csv('database/product.csv', index=False)
+# AI = pd.read_csv('database/product_new.csv')
+# trans = AI.iloc[0]
+# AI.drop(columns='category',inplace=True)
+# AI.drop(columns='asin',inplace=True)
+# AI = AI[AI['ProductID'] <= 6000]
+# AI.to_csv('database/product.csv', index=False)
+
 
 def get_data(request):
     newAPI = pd.DataFrame(data=request, index=[0])
@@ -40,9 +41,14 @@ def encode_api_data(request):
             else:
                 print('This category doesn`t exist...')
                 return None
-        encoded_df = pd.concat([encoded_df, encoded_row], axis=0)
+        print(encoded_df)
+        print('\nBea\n ')
+        print(encoded_row)
+        encoded_df = encoded_df._append(encoded_row, ignore_index=True)
+        print(encoded_df)
         final_df = pd.concat([df_selected[['ProductId', 'ratingCount', 'ratingAvg']], encoded_df], axis=1)
         final_df = final_df.rename(index={0: int(df_selected['ProductId'].values)})
+
         return final_df
 
 
