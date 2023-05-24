@@ -1,7 +1,6 @@
 from flask import Flask, request, jsonify
 from flask_restful import Api, Resource
 from utility import *
-import pypyodbc as odbc
 
 import pandas as pd
 import numpy as np
