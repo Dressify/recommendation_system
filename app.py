@@ -132,11 +132,11 @@ api.add_resource(AddProduct, '/add_product')
 api.add_resource(Test, '/test')
 
 if __name__ == '__main__':
-    app.config['ENV'] = 'development'
-    app.config['DEBUG'] = True
-    app.config['TESTING'] = True
-    app.run(debug=True)
-    # app.run()
+    # app.config['ENV'] = 'development'
+    # app.config['DEBUG'] = True
+    # app.config['TESTING'] = True
+    # app.run(debug=True)
+    app.run()
 
 # @app.route('/')
 # def hello_world():  # put application's code here
