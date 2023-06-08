@@ -56,10 +56,12 @@ class Predict(Resource):
                          9: "hoodies", 10: "sweatshirts", 11: "blazer", 12: "sneaker", 13: "boot", 14: "oxford",
                          15: "blouseClean", 16: "skirtClean", 17: "tie"}, inplace=True)
 
-            result2 = sorted_itemsDF.loc[:50, 'ProductID'].T.to_json()
-            # result2 = sorted_itemsDF.loc[:50, 'ProductID'].values.tolist()
-            print(result2)
-            return result2
+            # result2 = sorted_itemsDF.loc[:50, 'ProductID'].T.to_json()
+            result2 = sorted_itemsDF.loc[:50, 'ProductID'].values
+            result = list(map(int, result2))
+            # result = json.dumps(result2)
+            print(result)
+            return result
         except Exception as e:
             return {'error': str(e)}, 400
 
@@ -68,8 +70,10 @@ class AddProduct(Resource):
     def post(self):
         try:
             result = add_product(request.json)
-            return result
-
+            if result == 'Failed':
+                return {'error': 'This category doesn`t exist...'}, 400
+            else:
+                return result
         except Exception as e:
             return {'error': str(e)}, 400
 
@@ -128,11 +132,11 @@ api.add_resource(AddProduct, '/add_product')
 api.add_resource(Test, '/test')
 
 if __name__ == '__main__':
-    # app.config['ENV'] = 'development'
-    # app.config['DEBUG'] = True
-    # app.config['TESTING'] = True
-    # app.run(debug=True)
-    app.run()
+    app.config['ENV'] = 'development'
+    app.config['DEBUG'] = True
+    app.config['TESTING'] = True
+    app.run(debug=True)
+    # app.run()
 
 # @app.route('/')
 # def hello_world():  # put application's code here
