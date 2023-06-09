@@ -122,7 +122,7 @@ class PredictAll(Resource):
 
 class Test(Resource):
     def get(self):
-        return 'tested Successfully! yes!! Yes!!!', 200
+        return 'tested Successfully! yes!!', 200
 
 
     # APIs EndPoints
